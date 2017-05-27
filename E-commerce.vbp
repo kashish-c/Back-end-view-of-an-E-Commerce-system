@@ -1,30 +1,62 @@
-Type=Exe
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Reference=*\G{00025E04-0000-0000-C000-000000000046}#3.5#0#..\Program Files (x86)\Common Files\Microsoft Shared\DAO\dao2535.tlb#Microsoft DAO 2.5/3.51 Compatibility Library
-Form=E-commerce.frm
-Startup="Form1"
-Command32=""
-Name="Project1"
-HelpContextID="0"
-CompatibleMode="0"
-MajorVer=1
-MinorVer=0
-RevisionVer=0
-AutoIncrementVer=0
-ServerSupportFiles=0
-VersionCompanyName="kashish-pc"
-CompilationType=0
-OptimizationType=0
-FavorPentiumPro(tm)=0
-CodeViewDebugInfo=0
-NoAliasing=0
-BoundsCheck=0
-OverflowCheck=0
-FlPointCheck=0
-FDIVCheck=0
-UnroundedFP=0
-StartMode=0
-Unattended=0
-Retained=0
-ThreadPerObject=0
-MaxNumberOfThreads=1
+Public db As Database
+Public rs As Recordset
+Public c, d As Integer
+Public average As Double
+
+
+
+
+
+
+Public Sub Command1_Click()
+
+Dim e As Integer
+
+
+
+rs.AddNew
+rs.Fields(0).Value = Text1.Text
+rs.Fields(1).Value = Text2.Text
+c = c + 1
+d = d - 1
+e = Val(Text3.Text)
+Text4.Text = c
+Text5.Text = d + 50
+
+rs.Fields(2).Value = e
+rs.Fields(3).Value = c
+rs.Fields(4).Value = d + 50
+
+MsgBox ("Record Updated Succesfully")
+
+
+
+
+rs.Update
+
+End Sub
+
+
+
+Private Sub Command2_Click()
+Dim j As Integer
+j = Val(Text4.Text)
+
+MsgBox ("Total products sold till now are" & j)
+
+End Sub
+
+Private Sub Command3_Click()
+Dim j As Integer
+j = Val(Text5.Text)
+
+MsgBox ("Products left in the inventory are" & j)
+End Sub
+
+Private Sub Form_Load()
+Set db = OpenDatabase("C:\Users\HELLO\Desktop\inventory.mdb")
+Set rs = db.OpenRecordset("select * from inventory")
+
+
+End Sub
+
